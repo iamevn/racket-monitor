@@ -16,8 +16,7 @@ Example usage:
              (super-new)))
     
     (define m (new my_monitor%))
-
-(monitor-call m p1)
+    (monitor-call m p1)
 
 A timer that delays callers by however many seconds:
 
