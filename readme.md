@@ -16,7 +16,6 @@ Example usage:
              (super-new)))
     
     (define m (new my_monitor%))
-<<<<<<< HEAD
     
     (thread (lambda ()
               (let loop ()
@@ -25,9 +24,6 @@ Example usage:
     (thread (lambda ()
               (let loop ()
                 (monitor-call m p2))))
-=======
-    (monitor-call m p1)
->>>>>>> b19375af699221133e554b1af4f45e0725a63a09
 
 A timer that delays callers by however many seconds:
 
