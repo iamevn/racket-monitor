@@ -16,6 +16,7 @@ Example usage:
              (super-new)))
     
     (define m (new my_monitor%))
+<<<<<<< HEAD
     
     (thread (lambda ()
               (let loop ()
@@ -24,6 +25,9 @@ Example usage:
     (thread (lambda ()
               (let loop ()
                 (monitor-call m p2))))
+=======
+    (monitor-call m p1)
+>>>>>>> b19375af699221133e554b1af4f45e0725a63a09
 
 A timer that delays callers by however many seconds:
 
@@ -33,8 +37,10 @@ A timer that delays callers by however many seconds:
     
              (define check (make-cv))
              (define tod 0)
+             (define min +inf.0)
     
              (define (delay interval)
+               (set! min (min min (+ tod interval)))
                (let loop ([wake_time (+ tod interval)])
                  (when (> wake_time tod)
                    (cv-wait check)
@@ -42,7 +48,7 @@ A timer that delays callers by however many seconds:
     
              (define (tick)
                (set! tod (add1 tod))
-               (cv-signal-all check))
+               (when (>= tod min) (cv-signal-all check)))
     
              (super-new)))
     (define timer (new timer%))
@@ -54,7 +60,9 @@ A timer that delays callers by however many seconds:
                         (monitor-call timer tick)
                         (loop)))))
     
+    (display "see you in 5 seconds...")
     (monitor-call timer delay 5)
+    (display "hello!")
 
 TODO:
  - [ ] monitor%
