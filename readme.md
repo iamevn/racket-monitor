@@ -3,23 +3,23 @@ Example usage:
 
     (define my_monitor%
         (class monitor%
-             (public p1 p2)
-             (define cv1 (make-cv))
-             (define cv2 (make-cv))
-             (define (p1)
-                  (display "hello")
-                  (if (cv-empty? cv1) (cv-wait cv2) (cv-signal cv1)))
-             (define (p2)
-                  (cv-signal cv2)
-                  (cv-wait cv1)
-                  (display "world"))
-             (super-new)))
+            (public p1 p2)
+            (define cv1 (make-cv))
+            (define cv2 (make-cv))
+            (define (p1)
+                (display "hello")
+                (if (cv-empty? cv1) (cv-wait cv2) (cv-signal cv1)))
+            (define (p2)
+                (cv-signal cv2)
+                (cv-wait cv1)
+                (display "world"))
+            (super-new)))
     
     (define m (new my_monitor%))
     
     (monitor-call m p1)
 
-
+A timer that delays callers by however many seconds:
 
     (define timer%
         (class monitor%
@@ -44,19 +44,19 @@ Example usage:
     (define clock (thread
                 (lambda ()
                     (let loop ()
-                       (sleep 1)
-                       (monitor-call timer tick)
-                       (loop)))))
+                        (sleep 1)
+                        (monitor-call timer tick)
+                        (loop)))))
 
     (monitor-call timer delay 5)
 
 TODO:
  - [ ] monitor%
- - [ ] (monitor-call monitor procedure)
- - [ ] (make-cv)
- - [_] (cv-empty?)
- - [ ] (cv-wait cv)
- - [ ] (cv-wait cv rank) ?
- - [ ] (cv-signal cv)
- - [ ] (cv-signal-all cv)
- - [ ] (cv-minrank cv) ?
+ - [ ] \(monitor-call monitor procedure)
+ - [ ] \(make-cv)
+ - [ ] \(cv-empty?)
+ - [ ] \(cv-wait cv)
+ - [ ] \(cv-wait cv rank) ?
+ - [ ] \(cv-signal cv)
+ - [ ] \(cv-signal-all cv)
+ - [ ] \(cv-minrank cv) ?
