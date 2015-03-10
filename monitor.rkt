@@ -1,9 +1,9 @@
 #lang racket
 ; implements a synchronization montior
 (provide 
-  ; initialize the monitor
+  ; initialize the monitor (make-monitor (public p1 p2 ...) (define (p1) ...) (define (p2 arg1) ...) ...)
   make-monitor 
-  ; call method in monitor synchronously
+  ; call method in monitor synchronously (monitor-call monitor-name procedure-name [arg1 ...])
   monitor-call)
 (define-syntax make-monitor
   (syntax-rules ()
