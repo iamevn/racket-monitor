@@ -54,13 +54,13 @@ A timer that delays callers by however many seconds:
     (display "hello!")
 
 TODO:
- - [ ] ~~monitor%~~
+ - [x] ~~monitor%~~
  - [x] \(monitor-call monitor procedure)
  - [x] \(make-monitor monitor body)
  - [ ] \(make-cv)
- - [ ] \(cv-empty?)
+ - [ ] \(cv-empty? cv)
  - [ ] \(cv-wait cv)
- - [ ] \(cv-wait cv rank) ?
  - [ ] \(cv-signal cv)
  - [ ] \(cv-signal-all cv)
- - [ ] \(cv-minrank cv) ?
+ - [ ] _\(cv-wait cv rank)_
+ - [ ] _\(cv-minrank cv)_
