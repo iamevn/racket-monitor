@@ -1,3 +1,4 @@
+; doesn't run yet
 (define timer%
   (class monitor%
          (public delay tick)
