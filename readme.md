@@ -64,3 +64,4 @@ TODO:
  - [ ] \(cv-signal-all cv)
  - [ ] _\(cv-wait cv rank)_
  - [ ] _\(cv-minrank cv)_
+ Initial CV stuff is in place mostly as a test to see if I can get things to make sense scope-wise before I actually implement the various CV queue operations.
