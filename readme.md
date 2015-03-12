@@ -1,25 +1,23 @@
 Implementation of [monitors](https://en.wikipedia.org/wiki/Monitor_%28synchronization%29) in racket. Monitors are signal and continue.
 Example usage:
 
-    (define m (make-monitor
-                (public p1 p2)
-                (define cv1 (make-cv))
-                (define cv2 (make-cv))
-                (define (p1)
-                  (display "hello")
-                  (if (cv-empty? cv1) (cv-wait cv2) (cv-signal cv1)))
-                (define (p2)
-                  (cv-signal cv2)
-                  (cv-wait cv1)
-                  (display "world"))))
-    
-    (thread (lambda ()
-              (let loop ()
-                (monitor-call m p1))))
-    
-    (thread (lambda ()
-              (let loop ()
-                (monitor-call m p2))))
+    (define test-mon (make-monitor (public test)
+                        (define n 0)
+                        (define test
+                            (λ (idx)
+                                (set! n (add1 n))
+                                (display (~a idx" connected"))
+                                (let loop ([j 5])
+                                    (sleep 0.5) (display ".")
+                                    (unless (zero? j) (loop (sub1 j))))
+                            (display (~a n"th thread to connect.\n"))))))
+
+    (let loop ([n 5])
+        (thread (λ () (let t-loop ()
+                        (sleep 0.5)
+                        (monitor-call test-mon test n)
+                        (t-loop))))
+        (unless (zero? n) (loop (sub1 n))))
 
 A timer that delays callers by however many seconds:
 
